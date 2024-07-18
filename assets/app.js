@@ -1,43 +1,45 @@
 AOS.init();
-// const btn = document.getElementById('start'),
-// contianer = document.querySelectorAll('.contianer'),
-// next = document.getElementById('next')
+const btn = document.getElementById('start'),
+contianer = document.querySelectorAll('.contianer'),
+next = document.getElementById('next')
 
-// btn.addEventListener('click' , ()=>{
-//    contianer[0].classList.add('contianerkoOff');
-//    contianer[0].classList.remove('container');
-//    contianer[1].classList.add('containers');
-//    contianer[1].classList.remove('secondContainer')
-// })
+btn.addEventListener('click' , ()=>{
+   contianer[0].classList.add('contianerkoOff');
+   contianer[0].classList.remove('container');
+   contianer[1].classList.add('containers');
+   contianer[1].classList.remove('secondContainer')
+})
 
-// next.addEventListener('click' , ()=>{
-//     contianer[1].classList.add('secondContainer');
-//     contianer[1].classList.remove('container')
-//     Swal.fire({
-//         title: "Your Game Is Now Starting",
-//         showClass: {
-//           popup: `
-//             animate__animated
-//             animate__fadeInUp
-//             animate__faster
-//           `
-//         },
-//         hideClass: {
-//           popup: `
-//             animate__animated
-//             animate__fadeOutDown
-//             animate__faster
-//           `
-//         }
-//       });
-// })
+next.addEventListener('click' , ()=>{
+    contianer[1].classList.add('secondContainer');
+    contianer[1].classList.remove('container')
+    Swal.fire({
+        title: "Your Game Is Now Starting",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
+      callingBomb()
+      playground()
+})
 
-var playground = () => {
+function playground(){
     let playGroundArea = document.getElementById('playGround');
     let ClientHeight = playGroundArea.clientHeight;
     let ClientWidth = playGroundArea.clientWidth;
     
-    let points = 1;
+    var points = 1;
 
 
     setInterval(() => {
@@ -54,12 +56,64 @@ var playground = () => {
                     pointsWrite.innerHTML = `${points++}`
                 })
             }
-    }, 1000);
+          }, 1000);
+          
+          
+        }
 
 
 
+
+    function callingBomb(){
+    setInterval(() => {
+    let playGroundArea = document.getElementById('playGround');
+      let ClientHeight = playGroundArea.clientHeight;
+      let ClientWidth = playGroundArea.clientWidth;
+        let randomX = Math.floor(Math.random()*ClientWidth);
+    let randomY = Math.floor(Math.random()*ClientHeight);
+
+        playGroundArea.innerHTML += `<i class="fa-solid fa-bomb bomb-icon"  style="color: white; font-size: 30px; position: absolute; left: ${randomX}px; top: ${randomY}px;"></i>;`
+        let icons = document.getElementsByClassName('bomb-icon')
+            for (const clicked of icons) {
+                clicked.addEventListener('click' , ()=>{
+                    playGroundArea.removeChild(clicked)
+                    console.log(true);
+                    Swal.fire({
+                      title: "Oops!",
+                      text: "You Lost ! You Clicked The Bomb",
+                      icon: "warning",
+                      showCancelButton: false,
+                      confirmButtonColor: "#3085d6",
+                      cancelButtonColor: "#d33",
+                      confirmButtonText: "Restart Game"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                        window.location.href = 'index.html'
+                      }
+                    });
+                })
+            }
+    }, 10000);
+
+  }
+
+
+
+
+
+
+
+
+callingBomb()
+
+
+
+
+
+
+  
     function startTimer() {
-        let duration = 60 * 60; // 3 minutes in seconds
+        let duration = 3 * 60; 
         let timerDisplay = document.getElementById('time');
         let minutes, seconds;
     
@@ -75,30 +129,28 @@ var playground = () => {
             if (--duration < 0) {
                 clearInterval(interval);
                 Swal.fire({
-                    title: "Times UP",
-                    text : `Your Score is ${points}`,
-                    showClass: {
-                      popup: `
-                        animate__animated
-                        animate__fadeInUp
-                        animate__faster
-                      `
-                    },
-                    hideClass: {
-                      popup: `
-                        animate__animated
-                        animate__fadeOutDown
-                        animate__faster
-                      `
-                    }
-                  });
-                  window.location.reload()
+                  title: "Times Up",
+                  text: `The Game is over your total points are ${points}`,
+                  icon: "warning",
+                  showCancelButton: false,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    Swal.fire({
+                      title: "Deleted!",
+                      text: "Your file has been deleted.",
+                      icon: "success"
+                    });
+                  }
+                });
             }
         }, 1000);
     }
 
     startTimer()
     
-}
+
 
 playground()
