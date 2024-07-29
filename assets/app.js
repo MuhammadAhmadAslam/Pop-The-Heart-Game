@@ -29,8 +29,7 @@ next.addEventListener('click' , ()=>{
             animate__faster
           `
         }
-      });
-      // callingBomb()
+      })
       playground()
 })
 

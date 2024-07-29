@@ -16,7 +16,6 @@
     box-sizing: border-box;
 }
 body,html{
-    /* background-color: var(--quaternary-color) !important; */
     background-color: #2935BC !important;
     display: flex;
     justify-content: center;
@@ -27,12 +26,10 @@ body,html{
 }
 
 h1{
-    /* color: var(--secondary-color); */
     color: #CDD5EB;
     user-select: none;
 }
 .contianer{
-    /* background-color: var(--quaternary-color); */
     background-color: #2935BC;
     display: flex;
     justify-content: center;
@@ -42,7 +39,6 @@ h1{
     flex-direction: column;
 }
 .contianers{
-    /* background-color: var(--quaternary-color); */
     background-color: #2935BC;
     display: flex;
     justify-content: center;
@@ -103,21 +99,4 @@ button{
     animation: ani 6s infinite infinite infinite forwards;
     position: absolute;
     z-index: 3;
-}
-@keyframes ani {
-    0%{
-        top: 30px;
-    }
-    25%{
-        left: 30px;
-    }
-    50%{
-        right: 30px;
-    }
-    75%{
-        bottom: 30px;
-    }
-    100%{
-        display: none;
-    }
 }
