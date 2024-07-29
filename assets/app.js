@@ -31,6 +31,7 @@ next.addEventListener('click' , ()=>{
         }
       })
       playground()
+      window.location.reload()
 })
 
 
@@ -95,6 +96,7 @@ next.addEventListener('click' , ()=>{
   
           let heartIcon = document.createElement('i');
           heartIcon.className = 'fa-solid fa-heart icon';
+          heartIcon.classList.add('icon')
           heartIcon.style = `color: red; font-size: 30px; position: absolute; left: ${randomX}px; top: ${randomY}px;`;
   
           playGroundArea.appendChild(heartIcon);

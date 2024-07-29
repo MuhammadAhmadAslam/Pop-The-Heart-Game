@@ -95,8 +95,23 @@ button{
     overflow-x: hidden;
     position: relative;
 }
-.icon{
-    animation: ani 6s infinite infinite infinite forwards;
+.icon {
+    animation: rotate 2s infinite linear;
     position: absolute;
     z-index: 3;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+        margin-bottom: 90px;
+    }
+    50%{
+        transform: rotate(180deg);
+        margin-top: 50px;
+    }
+    100% {
+        transform: rotate(360deg);
+        margin-left: 90px;
+    }
 }
