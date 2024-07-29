@@ -30,81 +30,11 @@ next.addEventListener('click' , ()=>{
           `
         }
       });
-      callingBomb()
+      // callingBomb()
       playground()
 })
 
-function playground(){
-    let playGroundArea = document.getElementById('playGround');
-    let ClientHeight = playGroundArea.clientHeight;
-    let ClientWidth = playGroundArea.clientWidth;
-    
-    var points = 1;
 
-
-    setInterval(() => {
-        let randomX = Math.floor(Math.random()*ClientWidth);
-    let randomY = Math.floor(Math.random()*ClientHeight);
-
-        playGroundArea.innerHTML += `<i class="fa-solid fa-heart icon"  style="color: red; font-size: 30px; position: absolute; left: ${randomX}px; top: ${randomY}px;"></i>;`
-        let icon = document.getElementsByClassName('icon')
-            for (const ic of icon) {
-                ic.addEventListener('click' , ()=>{
-                    playGroundArea.removeChild(ic)
-                    console.log(true);
-                    let pointsWrite = document.getElementById('points')
-                    pointsWrite.innerHTML = `${points++}`
-                })
-            }
-          }, 1000);
-          
-          
-        }
-
-
-
-
-    function callingBomb(){
-    setInterval(() => {
-    let playGroundArea = document.getElementById('playGround');
-      let ClientHeight = playGroundArea.clientHeight;
-      let ClientWidth = playGroundArea.clientWidth;
-        let randomX = Math.floor(Math.random()*ClientWidth);
-    let randomY = Math.floor(Math.random()*ClientHeight);
-
-        playGroundArea.innerHTML += `<i class="fa-solid fa-bomb bomb-icon"  style="color: white; font-size: 30px; position: absolute; left: ${randomX}px; top: ${randomY}px;"></i>;`
-        let icons = document.getElementsByClassName('bomb-icon')
-            for (const clicked of icons) {
-                clicked.addEventListener('click' , ()=>{
-                    playGroundArea.removeChild(clicked)
-                    console.log(true);
-                    Swal.fire({
-                      title: "Oops!",
-                      text: "You Lost ! You Clicked The Bomb",
-                      icon: "warning",
-                      showCancelButton: false,
-                      confirmButtonColor: "#3085d6",
-                      cancelButtonColor: "#d33",
-                      confirmButtonText: "Restart Game"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        window.location.href = 'index.html'
-                      }
-                    });
-                })
-            }
-    }, 10000);
-
-  }
-
-
-
-
-
-
-
-
-callingBomb()
 
 
 
@@ -151,6 +81,74 @@ callingBomb()
 
     startTimer()
     
+
+    function playground() {
+      let playGroundArea = document.getElementById('playGround');
+      let ClientHeight = playGroundArea.clientHeight;
+      let ClientWidth = playGroundArea.clientWidth;
+  
+      let points = 1;
+  
+      // Function to create a heart icon
+      function createHeart() {
+          let randomX = Math.floor(Math.random() * ClientWidth);
+          let randomY = Math.floor(Math.random() * ClientHeight);
+  
+          let heartIcon = document.createElement('i');
+          heartIcon.className = 'fa-solid fa-heart icon';
+          heartIcon.style = `color: red; font-size: 30px; position: absolute; left: ${randomX}px; top: ${randomY}px;`;
+  
+          playGroundArea.appendChild(heartIcon);
+  
+          heartIcon.addEventListener('click', () => {
+              let crackedHeartIcon = document.createElement('i');
+              crackedHeartIcon.className = 'fa-solid fa-heart-crack';
+              crackedHeartIcon.style = `color: red; font-size: 30px; position: absolute; left: ${randomX}px; top: ${randomY}px; opacity: 0.5;`;
+  
+              playGroundArea.replaceChild(crackedHeartIcon, heartIcon);
+  
+              setTimeout(() => {
+                  playGroundArea.removeChild(crackedHeartIcon);
+              }, 1000);
+  
+              let pointsWrite = document.getElementById('points');
+              pointsWrite.innerHTML = `${points++}`;
+          });
+      }
+  
+      // Function to create a bomb icon
+      function createBomb() {
+          let randomX = Math.floor(Math.random() * ClientWidth);
+          let randomY = Math.floor(Math.random() * ClientHeight);
+  
+          let bombIcon = document.createElement('i');
+          bombIcon.className = 'fa-solid fa-bomb icon';
+          bombIcon.style = `color: red; font-size: 30px; position: absolute; left: ${randomX}px; top: ${randomY}px;`;
+  
+          playGroundArea.appendChild(bombIcon);
+  
+          bombIcon.addEventListener('click', () => {
+            Swal.fire({
+                          title: "Oops!",
+                          text: "You Lost ! You Clicked The Bomb",
+                          icon: "error",
+                          showCancelButton: false,
+                          confirmButtonColor: "#3085d6",
+                          cancelButtonColor: "#d33",
+                          confirmButtonText: "Restart Game"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            window.location.href = 'index.html'
+                          }
+                        });
+          });
+      }
+  
+      setInterval(createHeart, 1000);
+
+      setInterval(createBomb, 6000);
+  }
+  
 
 
 playground()

@@ -5,14 +5,19 @@
     --quaternary-color: #9ea6ab;
     --body-bg-color: #e8ecf3;
   }
+  @font-face {
+    font-family: 'pop';
+    src: url(../fonts/Poppins/Poppins-Medium.ttf);
+  }
 *{
     margin: 0;
     padding: 0;
+    font-family: 'pop';
     box-sizing: border-box;
-    /* border: 1px solid black; */
 }
 body,html{
-    background-color: var(--quaternary-color) !important;
+    /* background-color: var(--quaternary-color) !important; */
+    background-color: #2935BC !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,12 +25,15 @@ body,html{
     width: 100%;
     overflow: hidden;
 }
+
 h1{
-    color: var(--secondary-color);
+    /* color: var(--secondary-color); */
+    color: #CDD5EB;
     user-select: none;
 }
 .contianer{
-    background-color: var(--quaternary-color);
+    /* background-color: var(--quaternary-color); */
+    background-color: #2935BC;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,7 +42,8 @@ h1{
     flex-direction: column;
 }
 .contianers{
-    background-color: var(--quaternary-color);
+    /* background-color: var(--quaternary-color); */
+    background-color: #2935BC;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,9 +51,13 @@ h1{
     max-height: 160vh;
     flex-direction: column;
 }
-
+.secondContainer h1{
+    margin-bottom: 40px !important;
+}
 li{
-    color: #303030;
+    color: #CDD5EB;
+    margin-top: 20px;
+    font-size: 22px;
 }
 button{
     border: none;
@@ -53,6 +66,8 @@ button{
     height: 50px;
     margin-top: 40px !important;
     cursor: pointer;
+    background-color: #CDD5EB;
+    color: #2935BC;
     font-size: 20px;
 }
 .contianerkoOff{
@@ -78,7 +93,8 @@ button{
     height: 100vh;
     overflow: hidden;
     margin-top: 30px;
-    background-color: #303030 !important;
+    /* background-color: #303030 !important; */
+    background-color: #CDD5EB;
     overflow-y: hidden;
     overflow-x: hidden;
     position: relative;
